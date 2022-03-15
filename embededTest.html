@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Embedded Payment</title>
+    <style></style>
+</head>
+
+<body>
+    <h1>Embedded Payment</h1>
+
+<!-- <script src="http://localhost:1682/cardview/v1/session.js"></script> -->
+<script src="https://demo.myFatoorah.com/applePay/v2/applePay.js"></script>	
+<!-- <script src="http://localhost:1682/js/cardview/v1/tokenview-form.js"></script> -->
+	  <script src="https://demo.myFatoorah.com/cardview/v1/session.js"></script>
+     <div style="width:350px"> 
+         <div id="card-element"></div>
+     </div>
+	 
+    <button onclick="submit1()">Pay Now</button> 
+	
+<div style="width:350px"> 
+        <div id="card-element-applepay"></div> 
+</div>
+<button onclick="submitApplePay()">Pay Now111</button> 
+    <script>
+        var config = { 
+           countryCode: "kwt", // Here, add your Country Code. 
+           sessionId: "5469069b-4ea4-ec11-bafa-000d3aaca798", // Here you add the "SessionId" you receive from InitiateSession Endpoint.
+           cardViewId: "card-element",
+           // The following style is optional. 
+           style: { 
+             cardHeight: 180, 
+             <!-- input: {  -->
+               <!-- color: "black",  -->
+               <!-- fontSize: "13px",  -->
+               <!-- fontFamily: "sans-serif",  -->
+               <!-- inputHeight: "32px", -->
+               <!-- inputMargin: "0px",  -->
+               <!-- borderColor: "c7c7c7",  -->
+               <!-- borderWidth: "1px",  -->
+               <!-- borderRadius: "8px",  -->
+               <!-- boxShadow: "",  -->
+               <!-- placeHolder: {  -->
+                <!-- holderName: "Name On Card",  -->
+                <!-- cardNumber: "Number",  -->
+                <!-- expiryDate: "MM /YY",  -->
+                <!-- securityCode: "CVV",  -->
+               <!-- }  -->
+             <!-- },  -->
+             label: { 
+               display: false, 
+               color: "black", 
+               fontSize: "13px", 
+               fontFamily: "sans-serif", 
+               text: { 
+                 holderName: "Card Holder Name", 
+                 cardNumber: "Card Number", 
+                 expiryDate: "ExpiryDate", 
+                 securityCode: "Security Code", 
+               }, 
+             }, 
+             <!-- error: {  -->
+               <!-- borderColor: "red",  -->
+               <!-- borderRadius: "8px", -->
+               <!-- boxShadow: "0px",  -->
+            <!-- },  -->
+           },
+      }; 
+      myFatoorah.init(config); 
+
+      function submit1() {
+	   debugger;
+            myFatoorah.submit()
+            // On success
+            .then(function (response) {
+            // Here you need to pass session id to you backend here
+            var sessionId = response.SessionId;
+            var cardBrand = response.CardBrand;
+            })
+            // In case of errors
+            .catch(function (error) {
+                console.log(error);
+            });
+        }
+	 var configApplePay = {  
+            countryCode: "kwt", // Here, add your Country Code.  
+            sessionId: "5469069b-4ea4-ec11-bafa-000d3aaca798", // Here you add the "SessionId" you receive from InitiateSession Endpoint.  
+            cardViewId: "card-element-applepay",  
+		    currencyCode:"kwt",  
+            amount:"300"  
+     
+      };  
+       myFatoorahAP.init(configApplePay);  
+
+        function submitApplePay() {   
+	   debugger;   
+               myFatoorahAP.submit()  
+               // On success  
+               .then(function (response) {   
+               // Here you need to pass session id to you backend here  
+               var sessionId = response.SessionId;   
+               var cardBrand = response.CardBrand;   
+               })   
+               // In case of errors   
+               .catch(function (error) {   
+                  <!-- console.log(error);  
+               });  
+           }   
+	</script>
+
+</body>
+
+</html>
